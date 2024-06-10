@@ -15,15 +15,11 @@ resource "rancher2_cluster_v2" "foo-rke2" {
   enable_network_policy                    = var.enable_network_policy
   default_cluster_role_for_project_members = var.default_cluster_role_for_project_members
 
-  local_auth_endpoint {
-    ca_certs = file("../../../Modules/Rancher_Downstream_cluster/test.pem", )
-    enabled  = true
-    fqdn     = "prgx-dev.non-prod.rancher.prgx.com:6443"
-  }
 
   lifecycle {
-      ignore_changes = [local_auth_endpoint, cloud_credential_secret_name]
+      ignore_changes = [cloud_credential_secret_name]
      }
+
   rke_config {
 
     # creating the machine global config
